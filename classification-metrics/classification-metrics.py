@@ -55,14 +55,17 @@ def classification_metrics(y_true, y_pred, average="micro", pos_label=1):
         precision_avg = np.sum(weights * precision)
         recall_avg = np.sum(weights * recall)
         f1_score_avg = np.sum(weights * f1_score)
+
     elif average == "binary":
         idx = class_to_idx[pos_label]
 
         precision_avg = precision[idx]
         recall_avg = recall[idx]
         f1_score_avg = f1_score[idx]
+
     else:
         raise ValueError("Unknown average type.")
+
     result = {}
     result["accuracy"] = float(accuracy)
     result["precision"] = float(precision_avg)
@@ -70,4 +73,3 @@ def classification_metrics(y_true, y_pred, average="micro", pos_label=1):
     result["f1"] = float(f1_score_avg)
 
     return result
-    
