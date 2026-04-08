@@ -7,7 +7,7 @@ def create_embedding_layer(vocab_size: int, d_model: int) -> nn.Embedding:
     Create an embedding layer.
     """
     embedding = nn.Embedding(vocab_size, d_model)
-    nn.init.normal(embedding.weight, mean=0, std=1 / math.sqrt(d_model))
+    nn.init.normal(embedding.weight, mean = 0, std = 1 / math.sqrt(d_model))
     return embedding
 
 def embed_tokens(embedding: nn.Embedding, tokens: torch.Tensor, d_model: int) -> torch.Tensor:
@@ -16,4 +16,4 @@ def embed_tokens(embedding: nn.Embedding, tokens: torch.Tensor, d_model: int) ->
     """
     emb = embedding(tokens)
     emb = emb * math.sqrt(d_model)
-    return emb    
+    return emb
