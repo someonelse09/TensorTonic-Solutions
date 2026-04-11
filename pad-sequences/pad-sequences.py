@@ -23,4 +23,28 @@ def pad_sequences(seqs, pad_value=0, max_len=None):
         row += 1
 
     return result
-        
+
+
+"""
+Another cleaner approach:
+
+import numpy as np
+
+def pad_sequences(seqs, pad_value=0, max_len=None):
+    # 1. Determine max_len once
+    if max_len is None:
+        if not seqs: return np.array([])
+        max_len = max(len(seq) for seq in seqs)
+    
+    # 2. Preallocate with pad_value directly
+    result = np.full((len(seqs), max_len), pad_value, dtype=int)
+    
+    # 3. Vectorized filling
+    for row, seq in enumerate(seqs):
+        length = len(seq)
+        if length > 0:
+            # Only slice up to max_len if needed
+            result[row, :min(length, max_len)] = seq[:max_len]
+            
+    return result
+"""
